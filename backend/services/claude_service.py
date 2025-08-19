@@ -20,7 +20,7 @@ class ClaudeService:
             api_key: Anthropic API密钥
         """
         self.client = AsyncAnthropic(api_key=api_key)
-        self.model = "claude-3-5-sonnet-20241022"  # 使用Claude 3.5 Sonnet模型
+        self.model = "claude-3-5-sonnet-20241022"  # 临时回退到稳定的3.5版本
     
     async def generate_all_metadata(self, title: str, chapters: List[dict]) -> Dict:
         """
@@ -67,24 +67,10 @@ class ClaudeService:
         """
         
         try:
-            logger.debug(f"Claude client type: {type(self.client)}")
-            logger.debug(f"Has messages attr: {hasattr(self.client, 'messages')}")
-            
-            response = await self.client.messages.create(
-                model=self.model,
-                max_tokens=2000,
-                messages=[{"role": "user", "content": prompt}]
-            )
-            
-            # 解析返回的JSON
-            metadata = json.loads(response.content[0].text)
-            logger.info("成功生成所有元数据")
-            return metadata
-            
-        except json.JSONDecodeError as e:
-            logger.warning(f"JSON解析失败，降级为分别生成: {e}")
-            # 如果解析失败，分别调用各个方法
+            # 由于Claude 4.0 JSON解析不稳定，直接使用分别生成策略
+            logger.info("使用分别生成策略确保稳定性")
             return await self._generate_metadata_separately(title, chapters)
+            
         except Exception as e:
             import traceback
             logger.error(f"生成元数据失败: {e}")
@@ -161,7 +147,7 @@ class ClaudeService:
         
         try:
             response = await self.client.messages.create(
-                model="claude-3-5-sonnet-20241022",  # 使用更强的模型
+                model=self.model,  # 使用统一的模型配置
                 max_tokens=2000,
                 messages=[{"role": "user", "content": prompt}]
             )
@@ -242,7 +228,7 @@ class ClaudeService:
         
         try:
             response = await self.client.messages.create(
-                model="claude-3-haiku-20240307",
+                model=self.model,
                 max_tokens=50,
                 messages=[{"role": "user", "content": prompt}]
             )
@@ -284,7 +270,7 @@ class ClaudeService:
         
         try:
             response = await self.client.messages.create(
-                model="claude-3-haiku-20240307",
+                model=self.model,
                 max_tokens=200,
                 messages=[{"role": "user", "content": prompt}]
             )
@@ -320,7 +306,7 @@ class ClaudeService:
         
         try:
             response = await self.client.messages.create(
-                model="claude-3-haiku-20240307",
+                model=self.model,
                 max_tokens=300,
                 messages=[{"role": "user", "content": prompt}]
             )
@@ -363,7 +349,7 @@ class ClaudeService:
         
         try:
             response = await self.client.messages.create(
-                model="claude-3-5-sonnet-20241022",  # 使用更强的模型
+                model=self.model,  # 使用统一的模型配置
                 max_tokens=2000,
                 messages=[{"role": "user", "content": prompt}]
             )

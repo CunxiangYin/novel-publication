@@ -47,7 +47,21 @@ function App() {
       setActiveTab('edit')
     } catch (error) {
       console.error('文件处理失败:', error)
-      setError(error instanceof Error ? error.message : '文件处理失败')
+      
+      let errorMessage = '文件处理失败'
+      if (error instanceof Error) {
+        errorMessage = error.message
+        // 如果是axios错误，提供更详细的信息
+        if ('response' in error) {
+          const axiosError = error as any
+          const status = axiosError.response?.status
+          const data = axiosError.response?.data
+          errorMessage = `请求失败 (${status}): ${data?.message || data?.detail || error.message}`
+        }
+      }
+      
+      setError(errorMessage)
+      alert(`错误: ${errorMessage}`) // 临时添加alert便于调试
     } finally {
       setIsProcessing(false)
     }

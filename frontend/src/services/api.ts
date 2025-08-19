@@ -28,11 +28,39 @@ const API_BASE = getApiBase()
 
 const api = axios.create({
   baseURL: API_BASE,
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  timeout: 30000
+  timeout: 120000 // 增加到2分钟，因为AI生成需要更多时间
 })
+
+// 设置请求拦截器，为JSON请求自动添加Content-Type
+api.interceptors.request.use((config) => {
+  // 只为非FormData请求设置JSON Content-Type
+  if (!(config.data instanceof FormData) && !config.headers['Content-Type']) {
+    config.headers['Content-Type'] = 'application/json'
+  }
+  console.log(`API请求: ${config.method?.toUpperCase()} ${config.baseURL}${config.url}`)
+  return config
+})
+
+// 设置响应拦截器，处理错误
+api.interceptors.response.use(
+  (response) => {
+    console.log(`API响应成功: ${response.status}`, response.data)
+    return response
+  },
+  (error) => {
+    console.error('API请求失败:', {
+      message: error.message,
+      status: error.response?.status,
+      data: error.response?.data,
+      config: {
+        method: error.config?.method,
+        url: error.config?.url,
+        baseURL: error.config?.baseURL
+      }
+    })
+    return Promise.reject(error)
+  }
+)
 
 export interface NovelData {
   title: string
@@ -72,7 +100,7 @@ export const novelAPI = {
     
     const response = await api.post('/api/novel/upload', formData, {
       headers: {
-        'Content-Type': 'multipart/form-data'
+        // 让浏览器自动设置Content-Type，包含boundary
       }
     })
     return response.data
