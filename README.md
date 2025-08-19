@@ -55,10 +55,17 @@ npm run dev
 
 ### 4. 访问系统
 
+#### 本地访问
 打开浏览器访问：
-- **前端界面**: http://localhost:3000 (React应用)
-- **后端API**: http://localhost:8000
-- **API文档**: http://localhost:8000/docs
+- **前端界面**: http://localhost:3838 (React应用)
+- **后端API**: http://localhost:8038
+- **API文档**: http://localhost:8038/docs
+
+#### 局域网访问
+使用 `start-all-lan.sh` 启动后，可通过局域网IP访问：
+- **前端界面**: http://[你的IP]:3838
+- **后端API**: http://[你的IP]:8038
+- **手机访问**: 在同一网络下，手机浏览器直接访问上述地址
 
 ## 📁 项目结构
 

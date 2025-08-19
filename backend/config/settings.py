@@ -8,7 +8,7 @@ import os
 class Settings(BaseSettings):
     # API配置
     anthropic_api_key: str = ""
-    port: int = 8000
+    port: int = 8038
     
     # 文件路径
     novel_dir: str = "./data/novels"

@@ -20,10 +20,11 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000,
+    port: 3838,
+    host: '0.0.0.0', // Allow access from any network interface
     proxy: {
       '/api': {
-        target: 'http://localhost:8000',
+        target: 'http://localhost:8038',
         changeOrigin: true,
       },
     },
