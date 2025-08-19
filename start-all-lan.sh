@@ -46,8 +46,8 @@ pip install -q -r requirements.txt
 # 创建必要的目录
 mkdir -p data/novels data/backups uploads static
 
-# 后台启动后端（监听所有网络接口）
-python main.py &
+# 后台启动后端（监听所有网络接口，使用8038端口）
+PORT=8038 python main.py &
 BACKEND_PID=$!
 echo "✓ 后端服务已启动 (PID: $BACKEND_PID)"
 echo ""

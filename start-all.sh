@@ -30,8 +30,8 @@ fi
 source venv/bin/activate
 pip install -q -r requirements.txt
 
-# 后台启动后端
-python main.py &
+# 后台启动后端（使用8038端口）
+PORT=8038 python main.py &
 BACKEND_PID=$!
 echo "✓ 后端服务已启动 (PID: $BACKEND_PID)"
 echo "  访问地址: http://localhost:8038"
