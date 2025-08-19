@@ -1,0 +1,127 @@
+{
+  "summary": {
+    "total_score": 85,
+    "commercial_level": "高",
+    "major_issues": [
+      "开篇钩子可以更强烈，前500字铺垫略长",
+      "中后期章节爽点密度可以更高",
+      "部分章节缺少可传播的金句台词"
+    ],
+    "strengths": [
+      "霸总人设经典且有反差萌",
+      "春药误食开场具有强烈冲击力",
+      "追妻火葬场情节设置巧妙",
+      "甜宠日常温馨感人",
+      "结尾圆满符合读者期待"
+    ]
+  },
+  "element_scores": {
+    "hook_system": {
+      "score": 25,
+      "total": 30,
+      "breakdown": {
+        "opening_hook": 7,
+        "chapter_hooks": 9,
+        "paragraph_hooks": 4,
+        "ending_hooks": 5
+      }
+    },
+    "satisfaction_points": {
+      "score": 22,
+      "total": 25,
+      "density": "每1.8章一个大爽点",
+      "types": {
+        "face_slapping": 4,
+        "pampering": 5,
+        "growth": 3,
+        "romance": 6
+      }
+    },
+    "conflict_density": {
+      "score": 17,
+      "total": 20,
+      "average_per_chapter": 2.1
+    },
+    "standard_elements": {
+      "score": 13,
+      "total": 15,
+      "missing": ["隐藏身份梗深度挖掘", "更多职场打脸"]
+    },
+    "reader_stickiness": {
+      "score": 8,
+      "total": 10,
+      "retention_prediction": "82%"
+    }
+  },
+  "detailed_issues": [
+    {
+      "id": "CM001",
+      "type": "commercial",
+      "severity": "minor",
+      "chapter": 1,
+      "location": {
+        "paragraph": "第1-3段",
+        "word_range": "1-200",
+        "description": "开篇铺垫部分"
+      },
+      "problem": "开篇铺垫时间过长，冲突出现较晚",
+      "current_text": "深夜的医药集团大楼里，只有十二楼的实验室还亮着灯。沈知柔揉了揉酸涩的眼睛...",
+      "suggestion": "可以直接从电话铃声开始，或者在前50字内暗示危机",
+      "example_pattern": "采用[危机型开场]：直接从[紧急电话]切入，在[前100字]建立[生死悬念]"
+    },
+    {
+      "id": "CM002",
+      "type": "commercial",
+      "severity": "minor",
+      "chapter": 9,
+      "location": {
+        "paragraph": "全章",
+        "description": "第九章 恶毒女配设计陷害"
+      },
+      "problem": "反派智商略显不足，计谋过于简单",
+      "suggestion": "可以增加反派的智商和手段复杂度",
+      "example": "萧雨晴可以设计更精密的陷阱，比如利用商业合作或者家族势力"
+    }
+  ],
+  "missing_elements": [
+    {
+      "element": "更深层的身份反转",
+      "importance": "medium",
+      "suggested_placement": "第6-7章",
+      "implementation": "可以设置女主其实是某个隐藏家族的千金，增加身份对等感"
+    },
+    {
+      "element": "职场专业度展示",
+      "importance": "medium",
+      "suggested_placement": "第4-5章",
+      "implementation": "女主在医药研发方面的专业能力可以更突出"
+    }
+  ],
+  "optimization_roadmap": {
+    "immediate_fixes": [
+      "开篇前100字直接进入冲突",
+      "第8-10章增加1-2个小爽点",
+      "每章至少设置1个金句台词"
+    ],
+    "structural_improvements": [
+      "调整爽点分布，确保每1.5章一个大爽点",
+      "增强反派智商和手段",
+      "丰富职场线的专业描写"
+    ],
+    "long_term_enhancements": [
+      "建立更完整的配角体系",
+      "增加商战元素的深度",
+      "强化女主的成长弧线"
+    ]
+  },
+  "commercial_prediction": {
+    "current_market_potential": "高",
+    "improved_market_potential": "极高",
+    "target_audience_match": "88%",
+    "viral_probability": "75%",
+    "monetization_estimate": {
+      "subscription_rate": "预计82%",
+      "reward_rate": "预计15%"
+    }
+  }
+}

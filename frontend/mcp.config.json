@@ -1,0 +1,29 @@
+{
+  "mcpServers": {
+    "shadcn": {
+      "url": "https://api.shadcn.com/mcp/v1",
+      "enabled": true,
+      "features": {
+        "components": true,
+        "themes": true,
+        "blocks": true,
+        "charts": true
+      },
+      "auth": {
+        "type": "none"
+      }
+    }
+  },
+  "settings": {
+    "autoInstall": true,
+    "packageManager": "npm",
+    "typescript": true,
+    "tailwindConfig": "./tailwind.config.js",
+    "componentsPath": "./src/components/ui",
+    "utilsPath": "./src/lib/utils.ts",
+    "cssPath": "./src/index.css",
+    "style": "default",
+    "baseColor": "violet",
+    "cssVariables": true
+  }
+}

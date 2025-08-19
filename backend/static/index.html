@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小说发布系统 - 预览编辑器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            min-height: 600px;
+        }
+        
+        .sidebar {
+            background: #f7f9fc;
+            padding: 20px;
+            border-right: 1px solid #e1e8ed;
+        }
+        
+        .sidebar h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .file-input-wrapper {
+            margin-bottom: 20px;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .file-label {
+            display: block;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .file-label:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .content-area {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .chapters-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #e1e8ed;
+        }
+        
+        .chapters-section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .chapter-list {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 10px;
+            background: #f7f9fc;
+        }
+        
+        .chapter-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .chapter-item:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .status-bar {
+            padding: 15px 30px;
+            background: #f7f9fc;
+            border-top: 1px solid #e1e8ed;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .status-text {
+            color: #7c8798;
+        }
+        
+        .status-success {
+            color: #38ef7d;
+        }
+        
+        .status-error {
+            color: #f5576c;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .stats {
+            display: flex;
+            gap: 30px;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f7f9fc;
+            border-radius: 8px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            color: #7c8798;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 小说发布系统</h1>
+            <p>智能解析 • AI生成 • 一键发布</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="sidebar">
+                <h3>📁 文件操作</h3>
+                
+                <div class="file-input-wrapper">
+                    <label for="fileInput" class="file-label">
+                        选择Markdown文件
+                    </label>
+                    <input type="file" id="fileInput" class="file-input" accept=".md">
+                    <div id="fileName" style="margin-top: 10px; color: #7c8798; font-size: 14px;"></div>
+                </div>
+                
+                <input type="text" id="filePath" placeholder="或输入文件路径..." style="width: 100%; padding: 10px; margin-bottom: 20px; border: 2px solid #e1e8ed; border-radius: 8px;">
+                
+                <button class="btn btn-primary" onclick="parseNovel()">
+                    🔍 解析文件
+                </button>
+                
+                <button class="btn btn-success" onclick="saveChanges()" id="saveBtn" disabled>
+                    💾 保存修改
+                </button>
+                
+                <button class="btn btn-warning" onclick="publishNovel()" id="publishBtn" disabled>
+                    🚀 发布作品
+                </button>
+                
+                <div class="stats" id="stats" style="display: none;">
+                    <div class="stat-item">
+                        <div class="stat-value" id="wordCount">0</div>
+                        <div class="stat-label">字数</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="chapterCount">0</div>
+                        <div class="stat-label">章节</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-area">
+                <form id="novelForm">
+                    <div class="form-group">
+                        <label>作品标题</label>
+                        <input type="text" id="title" placeholder="请输入作品标题">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>作者笔名</label>
+                        <input type="text" id="author" placeholder="请输入作者笔名">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>一级分类</label>
+                            <select id="firstCategory">
+                                <option value="女频">女频</option>
+                                <option value="男频">男频</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>二级分类</label>
+                            <select id="secondCategory">
+                                <option value="现代言情">现代言情</option>
+                                <option value="古代言情">古代言情</option>
+                                <option value="浪漫青春">浪漫青春</option>
+                                <option value="都市">都市</option>
+                                <option value="玄幻">玄幻</option>
+                                <option value="仙侠">仙侠</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>三级分类</label>
+                            <select id="thirdCategory">
+                                <option value="豪门总裁">豪门总裁</option>
+                                <option value="都市生活">都市生活</option>
+                                <option value="婚恋情缘">婚恋情缘</option>
+                                <option value="宫廷侯爵">宫廷侯爵</option>
+                                <option value="古典架空">古典架空</option>
+                                <option value="穿越奇情">穿越奇情</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>作品简介</label>
+                        <textarea id="intro" placeholder="请输入作品简介（200-300字）"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>精彩片段</label>
+                        <textarea id="awesomeParagraph" placeholder="请输入精彩片段（400-1000字）" style="min-height: 200px;"></textarea>
+                    </div>
+                    
+                    <div class="chapters-section">
+                        <h3>章节列表</h3>
+                        <div class="chapter-list" id="chapterList">
+                            <div style="color: #7c8798; text-align: center; padding: 20px;">
+                                暂无章节，请先解析文件
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="status-bar">
+            <span id="status" class="status-text">就绪</span>
+            <span style="color: #7c8798;">API: http://localhost:8000</span>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        let currentData = null;
+        let currentFilePath = '';
+        
+        // 文件选择
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                document.getElementById('fileName').textContent = file.name;
+                // 上传文件
+                uploadFile(file);
+            }
+        });
+        
+        async function uploadFile(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            setStatus('正在上传文件...', 'loading');
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/novel/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('filePath').value = data.filePath;
+                    currentFilePath = data.filePath;
+                    setStatus('文件上传成功', 'success');
+                    // 自动解析
+                    parseNovel();
+                } else {
+                    throw new Error('上传失败');
+                }
+            } catch (error) {
+                setStatus('上传失败: ' + error.message, 'error');
+            }
+        }
+        
+        async function parseNovel() {
+            const filePath = document.getElementById('filePath').value || currentFilePath;
+            
+            if (!filePath) {
+                alert('请先选择文件或输入文件路径');
+                return;
+            }
+            
+            setStatus('正在解析文件...', 'loading');
+            document.getElementById('saveBtn').disabled = true;
+            document.getElementById('publishBtn').disabled = true;
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/novel/parse`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        filePath: filePath,
+                        options: {
+                            generateIntro: true,
+                            generateAwesomeParagraph: true,
+                            autoCategories: true
+                        }
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    currentData = data;
+                    currentFilePath = filePath;
+                    displayData(data);
+                    setStatus('解析成功', 'success');
+                    document.getElementById('saveBtn').disabled = false;
+                    document.getElementById('publishBtn').disabled = false;
+                } else {
+                    const error = await response.json();
+                    throw new Error(error.detail || '解析失败');
+                }
+            } catch (error) {
+                setStatus('解析失败: ' + error.message, 'error');
+            }
+        }
+        
+        function displayData(data) {
+            document.getElementById('title').value = data.title || '';
+            document.getElementById('author').value = data.author || '';
+            document.getElementById('firstCategory').value = data.firstCategory || '女频';
+            document.getElementById('secondCategory').value = data.secondCategory || '现代言情';
+            document.getElementById('thirdCategory').value = data.thirdCategory || '都市生活';
+            document.getElementById('intro').value = data.intro || '';
+            document.getElementById('awesomeParagraph').value = data.awesomeParagraph || '';
+            
+            // 显示统计信息
+            if (data.metadata) {
+                document.getElementById('stats').style.display = 'flex';
+                document.getElementById('wordCount').textContent = data.metadata.wordCount || 0;
+                document.getElementById('chapterCount').textContent = data.metadata.chapterCount || 0;
+            }
+            
+            // 显示章节列表
+            const chapterList = document.getElementById('chapterList');
+            if (data.chapterList && data.chapterList.length > 0) {
+                chapterList.innerHTML = data.chapterList.map((chapter, index) => 
+                    `<div class="chapter-item" onclick="viewChapter(${index})">
+                        ${chapter.chapterTitle}
+                    </div>`
+                ).join('');
+            }
+        }
+        
+        function viewChapter(index) {
+            if (currentData && currentData.chapterList[index]) {
+                const chapter = currentData.chapterList[index];
+                alert(`章节内容预览：\n\n${chapter.chapterTitle}\n\n${chapter.chapterContent.substring(0, 500)}...`);
+            }
+        }
+        
+        async function saveChanges() {
+            if (!currentData || !currentFilePath) {
+                alert('请先解析文件');
+                return;
+            }
+            
+            // 收集表单数据
+            currentData.title = document.getElementById('title').value;
+            currentData.author = document.getElementById('author').value;
+            currentData.firstCategory = document.getElementById('firstCategory').value;
+            currentData.secondCategory = document.getElementById('secondCategory').value;
+            currentData.thirdCategory = document.getElementById('thirdCategory').value;
+            currentData.intro = document.getElementById('intro').value;
+            currentData.awesomeParagraph = document.getElementById('awesomeParagraph').value;
+            
+            setStatus('正在保存...', 'loading');
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/novel/update`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        filePath: currentFilePath,
+                        data: currentData
+                    })
+                });
+                
+                if (response.ok) {
+                    setStatus('保存成功', 'success');
+                } else {
+                    throw new Error('保存失败');
+                }
+            } catch (error) {
+                setStatus('保存失败: ' + error.message, 'error');
+            }
+        }
+        
+        async function publishNovel() {
+            if (!currentData) {
+                alert('请先解析文件');
+                return;
+            }
+            
+            if (!confirm('确定要发布到微信读书平台吗？')) {
+                return;
+            }
+            
+            // 更新当前数据
+            currentData.title = document.getElementById('title').value;
+            currentData.author = document.getElementById('author').value;
+            currentData.firstCategory = document.getElementById('firstCategory').value;
+            currentData.secondCategory = document.getElementById('secondCategory').value;
+            currentData.thirdCategory = document.getElementById('thirdCategory').value;
+            currentData.intro = document.getElementById('intro').value;
+            currentData.awesomeParagraph = document.getElementById('awesomeParagraph').value;
+            
+            setStatus('正在发布...', 'loading');
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/novel/publish`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        data: currentData,
+                        platform: 'wechat'
+                    })
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    setStatus('发布成功！', 'success');
+                    alert('发布成功！\n' + JSON.stringify(result.response, null, 2));
+                } else {
+                    const error = await response.json();
+                    throw new Error(error.detail || '发布失败');
+                }
+            } catch (error) {
+                setStatus('发布失败: ' + error.message, 'error');
+            }
+        }
+        
+        function setStatus(text, type = 'normal') {
+            const statusEl = document.getElementById('status');
+            statusEl.className = 'status-text';
+            
+            if (type === 'loading') {
+                statusEl.innerHTML = text + '<span class="loading"></span>';
+            } else {
+                statusEl.textContent = text;
+                if (type === 'success') {
+                    statusEl.className = 'status-success';
+                } else if (type === 'error') {
+                    statusEl.className = 'status-error';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

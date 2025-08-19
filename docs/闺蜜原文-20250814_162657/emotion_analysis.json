@@ -1,0 +1,302 @@
+{
+  "summary": {
+    "total_score": 88,
+    "emotion_density_level": "高等",
+    "major_issues": [
+      "第2-3章情感递进略显急促",
+      "部分章节内心独白深度不够",
+      "男女主互动的细节描写可以更丰富"
+    ],
+    "strengths": [
+      "情感爆点分布均匀，每章都有戳心瞬间",
+      "人物情感转变逻辑清晰合理",
+      "醉酒反差萌和追妻火葬场情节设计巧妙",
+      "结局温馨圆满，情感饱满"
+    ]
+  },
+  "chapter_analysis": {
+    "1": {
+      "score": 92,
+      "emotion_peaks": 4,
+      "peak_details": [
+        {
+          "location": "第1章 春药误食段落",
+          "type": "紧张恐慌",
+          "intensity": 4,
+          "description": "春药发作时的绝望与无助"
+        },
+        {
+          "location": "第1章 与神秘男子相遇",
+          "type": "羞涩紧张",
+          "intensity": 5,
+          "description": "失身时的复杂情感"
+        }
+      ]
+    },
+    "2": {
+      "score": 85,
+      "emotion_peaks": 3,
+      "peak_details": [
+        {
+          "location": "第2章 厉景深愤怒段落",
+          "type": "恐惧",
+          "intensity": 4,
+          "description": "得知霸总要追杀的恐惧"
+        },
+        {
+          "location": "第2章 发现怀孕",
+          "type": "震惊绝望",
+          "intensity": 5,
+          "description": "意外怀孕的复杂心情"
+        }
+      ]
+    },
+    "3": {
+      "score": 80,
+      "emotion_peaks": 2,
+      "peak_details": [
+        {
+          "location": "第3章 霸总上门调查",
+          "type": "恐惧紧张",
+          "intensity": 4,
+          "description": "身份即将暴露的恐慌"
+        }
+      ]
+    },
+    "4": {
+      "score": 78,
+      "emotion_peaks": 2,
+      "peak_details": [
+        {
+          "location": "第4章 发现锦囊被转赠",
+          "type": "心痛愤怒",
+          "intensity": 5,
+          "description": "被渣男背叛的绝望"
+        }
+      ]
+    },
+    "5": {
+      "score": 95,
+      "emotion_peaks": 4,
+      "peak_details": [
+        {
+          "location": "第5章 醉酒霸总撒娇",
+          "type": "甜蜜心动",
+          "intensity": 5,
+          "description": "反差萌带来的心动感"
+        },
+        {
+          "location": "第5章 霸总说喜欢",
+          "type": "震惊甜蜜",
+          "intensity": 5,
+          "description": "听到告白时的激动"
+        }
+      ]
+    },
+    "6": {
+      "score": 82,
+      "emotion_peaks": 3,
+      "peak_details": [
+        {
+          "location": "第6章 醒来后的温柔",
+          "type": "温暖感动",
+          "intensity": 4,
+          "description": "感受到被关心的温暖"
+        }
+      ]
+    },
+    "7": {
+      "score": 90,
+      "emotion_peaks": 3,
+      "peak_details": [
+        {
+          "location": "第7章 DNA检测结果",
+          "type": "恐惧绝望",
+          "intensity": 5,
+          "description": "真相大白时的绝望"
+        },
+        {
+          "location": "第7章 霸总表白",
+          "type": "震惊感动",
+          "intensity": 5,
+          "description": "听到真心告白的感动"
+        }
+      ]
+    },
+    "8": {
+      "score": 88,
+      "emotion_peaks": 3,
+      "peak_details": [
+        {
+          "location": "第8章 霸总求婚",
+          "type": "震惊甜蜜",
+          "intensity": 5,
+          "description": "被求婚时的幸福感"
+        }
+      ]
+    },
+    "9": {
+      "score": 85,
+      "emotion_peaks": 3,
+      "peak_details": [
+        {
+          "location": "第9章 恶毒女配陷害",
+          "type": "愤怒厌恶",
+          "intensity": 4,
+          "description": "对反派的愤怒"
+        }
+      ]
+    },
+    "10": {
+      "score": 95,
+      "emotion_peaks": 4,
+      "peak_details": [
+        {
+          "location": "第10章 车祸场景",
+          "type": "绝望恐惧",
+          "intensity": 5,
+          "description": "生死关头的绝望"
+        },
+        {
+          "location": "第10章 霸总跪地祈祷",
+          "type": "心痛感动",
+          "intensity": 5,
+          "description": "看到深情的感动"
+        }
+      ]
+    },
+    "11": {
+      "score": 88,
+      "emotion_peaks": 3,
+      "peak_details": [
+        {
+          "location": "第11章 母子平安",
+          "type": "劫后余生的喜悦",
+          "intensity": 5,
+          "description": "死里逃生的庆幸"
+        }
+      ]
+    },
+    "12": {
+      "score": 92,
+      "emotion_peaks": 4,
+      "peak_details": [
+        {
+          "location": "第12章 霸总跪搓衣板",
+          "type": "甜蜜好笑",
+          "intensity": 4,
+          "description": "被宠爱的甜蜜感"
+        },
+        {
+          "location": "第12章 公开示爱",
+          "type": "羞涩甜蜜",
+          "intensity": 5,
+          "description": "被公开宠爱的幸福"
+        }
+      ]
+    },
+    "13": {
+      "score": 90,
+      "emotion_peaks": 3,
+      "peak_details": [
+        {
+          "location": "第13章 婚礼仪式",
+          "type": "幸福圆满",
+          "intensity": 5,
+          "description": "梦想成真的幸福感"
+        }
+      ]
+    },
+    "14": {
+      "score": 85,
+      "emotion_peaks": 3,
+      "peak_details": [
+        {
+          "location": "第14章 霸总奶爸日常",
+          "type": "温馨甜蜜",
+          "intensity": 4,
+          "description": "家庭生活的温馨"
+        }
+      ]
+    },
+    "15": {
+      "score": 88,
+      "emotion_peaks": 2,
+      "peak_details": [
+        {
+          "location": "第15章 圆满结局",
+          "type": "幸福满足",
+          "intensity": 4,
+          "description": "完美结局的满足感"
+        }
+      ]
+    }
+  },
+  "detailed_issues": [
+    {
+      "id": "EM001",
+      "type": "emotion",
+      "severity": "minor",
+      "chapter": 2,
+      "location": {
+        "paragraph": "第6段",
+        "line_range": "20-25",
+        "description": "第二章 得知霸总身份"
+      },
+      "problem": "情感转变过于急促，缺乏过渡",
+      "current_text": "沈知柔的脸瞬间变得惨白。厉景深...那个男人是厉景深？",
+      "suggestion": "增加内心挣扎的描写，放慢情感转变的节奏",
+      "example": "沈知柔感觉血液在这一瞬间凝固了。厉景深...这个名字如雷贯耳，整个商界无人不知。她的双腿开始发软，脑海中不断回响着那个夜晚的画面。那个温柔拥抱她的男人，竟然是传说中冷酷无情的厉景深？"
+    },
+    {
+      "id": "EM002",
+      "type": "emotion",
+      "severity": "minor",
+      "chapter": 3,
+      "location": {
+        "paragraph": "第12段",
+        "line_range": "45-50",
+        "description": "第三章 霸总调查现场"
+      },
+      "problem": "紧张氛围营造不够充分",
+      "current_text": "沈知柔感觉自己的血液都要凝固了。",
+      "suggestion": "增加生理反应和环境描写",
+      "example": "沈知柔感觉自己的血液都要凝固了。她的手心冒出冷汗，心跳声在耳边轰鸣，仿佛整个世界都能听到。空气变得稀薄，每一次呼吸都像是在刀尖上行走。"
+    },
+    {
+      "id": "EM003",
+      "type": "emotion",
+      "severity": "minor",
+      "chapter": 6,
+      "location": {
+        "paragraph": "第8段",
+        "line_range": "30-35",
+        "description": "第六章 清醒后的对话"
+      },
+      "problem": "内心独白深度不够，情感层次单一",
+      "current_text": "厉景深看着面前这个温柔细心的女孩，心中涌起一种奇异的感觉。",
+      "suggestion": "深化内心活动，展现情感的复杂性",
+      "example": "厉景深看着面前这个温柔细心的女孩，心中涌起一种前所未有的复杂情感。是感激？是心动？还是一种说不清道不明的眷恋？他从未体验过被人如此细致入微地照顾，那种被呵护的感觉让他的心脏不受控制地加速跳动。"
+    }
+  ],
+  "recommendations": {
+    "urgent_fixes": [
+      "第2-3章增加情感过渡，避免情绪转变过于突兀",
+      "加强紧张场面的氛围营造，通过环境和生理反应烘托情感",
+      "深化关键情节的内心独白，展现人物情感的层次性"
+    ],
+    "enhancement_areas": [
+      "增加更多微表情和肢体语言描写",
+      "在甜蜜情节中加入更多细节描写",
+      "利用对比手法突出情感冲击力",
+      "适当增加男主视角的内心戏"
+    ]
+  },
+  "emotion_distribution": {
+    "chart_data": {
+      "chapters": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+      "scores": [92,85,80,78,95,82,90,88,85,95,88,92,90,85,88],
+      "trend": "整体高位运行，第5章和第10章为情感高峰，第3-4章略有低谷但迅速回升"
+    }
+  }
+}
