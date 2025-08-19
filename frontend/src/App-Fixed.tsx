@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 function AppFixed() {
   const [activeTab, setActiveTab] = useState('upload')
-  const [novel, setNovel] = useState<any>(null)
+  const [novel] = useState<any>(null)
 
   return (
     <div className="min-h-screen bg-background">

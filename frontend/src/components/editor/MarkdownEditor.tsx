@@ -1,13 +1,11 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Card } from '@/components/ui/card'
 import { 
-  Eye, Edit, Split, Maximize2, Minimize2, Download, Upload,
+  Eye, Edit, Split, Maximize2, Minimize2, Download,
   Bold, Italic, Link, Image, Code, List, ListOrdered, Quote, Heading
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
