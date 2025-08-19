@@ -38,7 +38,7 @@ class NovelParser:
     
     def extract_title(self, content: str) -> str:
         """
-        提取标题（第3行）
+        提取标题（第一个#号标记的内容）
         
         Args:
             content: 文件内容
@@ -47,12 +47,23 @@ class NovelParser:
             作品标题
         """
         lines = content.split('\n')
+        
+        # 查找第一个以#开头的行（但不是##）
+        for line in lines:
+            line = line.strip()
+            if line.startswith('#') and not line.startswith('##'):
+                # 移除#号和空格
+                title = re.sub(r'^#+\s*', '', line).strip()
+                if title:
+                    return title
+        
+        # 如果没找到#标题，尝试第3行（兼容旧格式）
         if len(lines) >= 3:
-            # 移除Markdown标题符号
             title = lines[2].strip()
-            # 移除所有的#号和空格
             title = title.replace('#', '').strip()
-            return title
+            if title:
+                return title
+                
         return "未命名作品"
     
     def extract_chapters(self, content: str) -> List[Dict[str, str]]:

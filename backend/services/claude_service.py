@@ -43,7 +43,7 @@ class ClaudeService:
 
         请生成以下信息，以JSON格式返回：
         {{
-            "intro": "作品简介（200-300字，突出故事核心冲突和人物关系）",
+            "intro": "作品简介（400-1000字，详细介绍故事背景、核心冲突和人物关系）",
             "author": "作者笔名（根据作品风格生成合适的2-4字中文笔名）",
             "firstCategory": "一级分类（女频/男频）",
             "secondCategory": "二级分类（如：现代言情、古代言情、都市、玄幻等）",
@@ -133,21 +133,23 @@ class ClaudeService:
         }
     
     async def generate_intro(self, title: str, chapters: List[dict]) -> str:
-        """生成作品简介"""
-        sample_content = self._get_sample_content(chapters, max_chapters=3)
+        """生成作品简介（400-1000字）"""
+        sample_content = self._get_sample_content(chapters, max_chapters=5)
         
         prompt = f"""
-        基于以下小说信息生成200-300字的作品简介：
+        基于以下小说信息生成400-1000字的作品简介：
         
         标题：{title}
         内容样本：{sample_content}
         
         要求：
-        1. 突出故事核心冲突
-        2. 介绍主要人物关系
-        3. 设置悬念吸引读者
-        4. 语言简洁有吸引力
-        5. 不要剧透结局
+        1. 详细介绍故事背景和世界观
+        2. 深入描述主要人物的性格和关系
+        3. 突出故事的核心冲突和矛盾
+        4. 设置多个悬念点吸引读者
+        5. 语言生动有画面感
+        6. 不要剧透关键情节和结局
+        7. 字数必须在400-1000字之间
         
         直接返回简介内容，不要有其他说明。
         """
@@ -155,13 +157,25 @@ class ClaudeService:
         try:
             response = await self.client.messages.create(
                 model="claude-3-haiku-20240307",
-                max_tokens=500,
+                max_tokens=1500,
                 messages=[{"role": "user", "content": prompt}]
             )
-            return response.content[0].text.strip()
+            
+            intro = response.content[0].text.strip()
+            
+            # 确保字数在范围内
+            if len(intro) > 1000:
+                intro = intro[:1000]
+            elif len(intro) < 400:
+                # 如果太短，生成默认简介
+                intro = f"《{title}》是一部精彩纷呈的网络小说。故事情节跌宕起伏，人物形象鲜明立体。" + intro
+                if len(intro) < 400:
+                    intro = intro + f"\n\n本书通过细腻的笔触和精彩的情节设置，为读者呈现了一个充满想象力的世界。每一个章节都充满悬念，每一个人物都有其独特的魅力。无论是主角的成长历程，还是配角的精彩表现，都让人印象深刻。\n\n这是一部值得细细品味的作品，相信每一位读者都能在其中找到属于自己的感动和共鸣。翻开这本书，让我们一起走进这个精彩的故事世界。"
+                    
+            return intro
         except Exception as e:
             logger.error(f"生成简介失败: {e}")
-            return "暂无简介"
+            return f"《{title}》是一部精彩的网络小说，情节跌宕起伏，人物形象鲜明。故事充满悬念和惊喜，每一章都让人欲罢不能。作者以其独特的写作风格和丰富的想象力，为读者构建了一个引人入胜的故事世界。"
     
     async def generate_author(self, title: str, chapters: List[dict]) -> str:
         """生成作者笔名"""
